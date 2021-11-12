@@ -93,7 +93,8 @@ def getShipment(request,pk):
 @api_view(['POST'])   
 def deletetokens(request):
     try:
-        tokens = AuthToken.objects.all().delete()
+        AuthToken.objects.all().delete()
+        return Response(status=status.HTTP_201_CREATED)
     except AuthToken.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
