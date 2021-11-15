@@ -141,3 +141,18 @@ def trackOneShipment(request,fk):
     if request.method == 'GET':
         serializer = TrackingSerializer(ship)
         return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateTracking(request,fk):
+    try:
+        ship = Tracking.objects.get(shipment=fk)
+    except Tracking.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = TrackingSerializer(ship, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
