@@ -31,6 +31,7 @@ class CreateShipment(models.Model):
 class Tracking(models.Model):
     shipment = models.ForeignKey(CreateShipment, on_delete=models.CASCADE)
     pickScheduled = models.BooleanField(default = True)
+    cancelled = models.BooleanField(default = False)
     outForPickup = models.BooleanField(default = False)
     pickedUp = models.BooleanField(default = False)
     transit = models.BooleanField(default = False)

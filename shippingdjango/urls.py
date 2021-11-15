@@ -14,5 +14,6 @@ urlpatterns = [
     path('logoutall/', knox_views.LogoutAllView.as_view()),
     path('currentuser/',views.current_user),
     path('deletetokens/',views.deletetokens),
-    path('userShipment/',views.userShipment)
+    path('userShipment/',views.userShipment),
+    path('updateShipment/<str:pk>',views.updateShipment)
 ]
