@@ -52,6 +52,29 @@ def login(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def changePassword(request):
+
+    if request.method == 'PUT':
+
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            if not request.user.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            elif serializer.data.get("old_password") == serializer.data.get("new_password"):
+                return Response({"old_password": ["new password cannot be same"]}, status=status.HTTP_400_BAD_REQUEST)
+            request.user.set_password(serializer.data.get("new_password"))
+            request.user.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
+            return Response(response)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET','POST'])
 @permission_classes([IsAuthenticated])

@@ -16,5 +16,7 @@ urlpatterns = [
     path('deletetokens/',views.deletetokens),
     path('userShipment/',views.userShipment),
     path('updateShipment/<str:pk>',views.updateShipment),
-    path('updateTracking/<str:fk>',views.updateTracking)
+    path('updateTracking/<str:fk>',views.updateTracking),
+    path('changepassword/',views.changePassword),
+
 ]
