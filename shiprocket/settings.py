@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'corsheaders',
+    'django_rest_passwordreset',
 ]
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
@@ -99,6 +100,16 @@ DATABASES = {
     }
 }
 
+
+# Email settings
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT =config('EMAIL_PORT')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER') # from mail address or login cred
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') # password
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
