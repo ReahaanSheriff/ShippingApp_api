@@ -1,3 +1,9 @@
+# from __future__ import print_function
+# import time
+# import sib_api_v3_sdk
+# from sib_api_v3_sdk.rest import ApiException
+# from pprint import pprint
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -52,13 +58,34 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
     email_plaintext_message = "Copy paste the token to reset your password \n {}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
 
+#     configuration = sib_api_v3_sdk.Configuration()
+#     configuration.api_key['api-key'] = 'api key'
+
+#     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
+#     subject = "My Subject"
+#     html_content = "<html><body><h1>"+email_plaintext_message +"</h1></body></html>"
+#     sender = {"name":"John Doe","email":"reahaansheriff@gmail.com"}
+#     to = [{"email":"reahaansherif@gmail.com","name":"Jane Doe"}]
+# #cc = [{"email":"example2@example2.com","name":"Janice Doe"}]
+# #bcc = [{"name":"John Doe","email":"example@example.com"}]
+# #reply_to = {"email":"replyto@domain.com","name":"John Doe"}
+#     headers = {"Some-Custom-Name":"unique-id-1234"}
+#     params = {"parameter":"My param value","subject":"New Subject"}
+#     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(to=to, headers=headers, html_content=html_content, sender=sender, subject=subject)
+
+#     try:
+#         api_response = api_instance.send_transac_email(send_smtp_email)
+#         pprint(api_response)
+#     except ApiException as e:
+        #print("Exception when calling SMTPApi->send_transac_email: %s\n" % e)
     send_mail(
         # title:
         "Password Reset for {title}".format(title="Swift shipping application"),
-        # message:
-        email_plaintext_message,
-        # from:
-        "reahaansheriff@gmail.com",
-        # to:
-        [reset_password_token.user.email]
-    )
+         # message:
+         email_plaintext_message,
+         # from:
+         "reahaansheriff@gmail.com",
+         # to:
+         [reset_password_token.user.email],
+     fail_silently=False,
+     )
