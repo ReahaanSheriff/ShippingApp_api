@@ -49,6 +49,7 @@ class Tracking(models.Model):
     transit = models.BooleanField(default = False)
     outForDelivery = models.BooleanField(default = False)
     delivered = models.BooleanField(default = False)
+    undelivered = models.BooleanField(default = False)
 
 
 
